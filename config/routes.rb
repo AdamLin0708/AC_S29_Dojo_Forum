@@ -9,5 +9,6 @@ Rails.application.routes.draw do
     root "home#index"
     resources :posts
     resources :categories, except: [:show]
+    resources :users, only: [:index]
   end
 end
