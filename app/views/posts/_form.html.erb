@@ -28,8 +28,8 @@
       <div class="form-group">
         <%= f.label :categories, "分類" %><br>                  
         <% @categories.each do |category| %>
-          <%= category.name %>
-          <%= f.check_box :categories, { multiple: true }, category.id, false %>
+          <%= category.name %>          
+          <%= f.check_box :categories, { multiple: true, checked: @post.categories.include?(category.id.to_s) }, category.id, false  %>
         <% end %>
       </div> 
 
