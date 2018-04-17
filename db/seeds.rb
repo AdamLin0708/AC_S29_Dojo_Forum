@@ -7,5 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-User.create(email: "admin@example.com", password: "12345678", role: 'admin')
+User.create(email: "admin@example.com", password: "12345678", role: 'admin', username: '管理員')
 puts "Default admin created!"
