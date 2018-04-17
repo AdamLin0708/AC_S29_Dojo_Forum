@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     root "home#index"
     resources :posts
     resources :categories, except: [:show]
-    resources :users, only: [:index]
+    resources :users, only: [:index] do 
+      member do
+        post :update
+      end
+    end
   end
 end
