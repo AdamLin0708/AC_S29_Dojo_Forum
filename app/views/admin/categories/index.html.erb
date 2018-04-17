@@ -1,0 +1,37 @@
+<div class="container">
+  <ul class="nav nav-pills">
+    <li><%= link_to '後台總表', admin_root_path %></li>
+    <li><%= link_to '文章列表', admin_posts_path %></li>    
+    <li class="active"><%= link_to '分類列表', admin_categories_path %></li>
+    <li><%= link_to '使用者列表', admin_users_path %></li>    
+  </ul>
+</div>
+<br>
+<div class="container">
+  <%= form_tag(admin_categories_path, :method => 'post') do  %>    
+    <div class="input-group">
+      <%= text_field_tag :name, params[:name] %>
+      <%= submit_tag "Create" %>
+    </div>
+  <% end %>
+  <br> 
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @categories.each do |category| %>
+        <tr>
+          <td><%= category.name %></td>
+          <td>
+            <%= link_to '編輯', edit_admin_category_path(category.id) %>
+            <%= link_to '刪除', admin_category_path(category.id), method: :delete, data: { confirm: "確定要刪除?"} %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
