@@ -34,6 +34,11 @@
       </div> 
 
       <div class="form-group">
+        <%= f.label :status, "狀態" %><br>                  
+        <%= select_tag('post[status]', options_for_select([['草稿', 'DRAFT'], ['發布', 'PUBLISHED']], @post.status == "PUBLISHED" ? "PUBLISHED" : "DRAFT"))%>
+      </div> 
+
+      <div class="form-group">
         <%= f.submit '確認', :class => 'btn btn-primary' %>
       </div>
     <% end %>
