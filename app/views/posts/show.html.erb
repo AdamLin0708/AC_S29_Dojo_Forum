@@ -1,0 +1,5 @@
+title <%= @post.title %><br>
+content <%= @post.content %><br>
+author <%= @post.user.id %><br>
+<%= link_to '編輯', edit_post_path(@post.id) %>
+<%= link_to '刪除', post_path(@post.id), method: :delete, data: { confirm: "確定要刪除?"} %>
