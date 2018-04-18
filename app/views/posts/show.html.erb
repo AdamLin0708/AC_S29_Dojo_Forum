@@ -1,5 +1,59 @@
-title <%= @post.title %><br>
-content <%= @post.content %><br>
-author <%= @post.user.id %><br>
-<%= link_to '編輯', edit_post_path(@post.id) %>
-<%= link_to '刪除', post_path(@post.id), method: :delete, data: { confirm: "確定要刪除?"} %>
+<div class="container-fluid">
+  title <%= @post.title %><br>
+</div>
+<div class="container-fluid" style="background-color: lightblue">
+  <div class="row">
+    <div class="col-md-4">
+      <% if @post.user.avatar? %>
+        <%= image_tag(@post.user.avatar, class: 'img-circle img-responsive') %>
+      <% else %>
+        <img src="http://via.placeholder.com/200x200" class="img-circle img-responsive">
+      <% end %> 
+      <p><%= @post.user.username %></p>        
+    </div>
+    <div class="col-md-8">
+      <% if @post.image? %>
+        <%= image_tag(@post.image, class: 'img-circle img-responsive') %>
+      <% else %>
+        <img src="http://via.placeholder.com/300x100" class="img-responsive">
+      <% end %> 
+      <p>content <%= @post.content %></p>
+      <div class="pull-right">
+        <%= link_to '編輯', edit_post_path(@post.id) %>
+        <%= link_to '刪除', post_path(@post.id), method: :delete, data: { confirm: "確定要刪除?"} %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">  
+    <% @post.replies.each do |reply| %>
+      <div class="row">
+        <div class="col-md-4">
+          <% if reply.user.avatar? %>
+            <%= image_tag(reply.user.avatar, class: 'img-circle img-responsive') %>
+          <% else %>          
+            <img src="http://via.placeholder.com/200x200" class="img-circle img-responsive">            
+          <% end %> 
+          <p><%= reply.user.username %></p>    
+        </div>
+        <div class="col-md-8">
+          <p>content <%= reply.comment %></p>
+          <% if reply.user == current_user %>
+             <div class="pull-right">編輯 刪除</div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>      
+</div>
+<div class="container-fluid">
+  <%= form_for :reply , :url => {:controller=>'replies', :action => 'create' } do |f| %>
+    <input type="hidden" name="reply[post_id]" value=<%= @post.id %>>
+    <div class="form-group">
+      <%= f.text_area :comment, placeholder: "寫些什麼吧～", class: "form-control", rows: 4, style: 'resize: none'%>
+    </div>
+    <div class="form-group">
+      <%= f.submit 'Reply!', class: "btn btn-primary pull-right" %>
+    </div>
+  <% end %> 
+</div>
+
