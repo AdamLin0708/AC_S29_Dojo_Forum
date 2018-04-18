@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180417143314) do
+ActiveRecord::Schema.define(version: 20180418100401) do
 
   create_table "categories", force: :cascade do |t|
     t.string "code_abbr"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 20180417143314) do
     t.integer "user_id"
     t.string "image"
     t.text "categories"
+    t.integer "replies_count", default: 0
+  end
+
+  create_table "replies", force: :cascade do |t|
+    t.text "comment"
+    t.integer "post_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
