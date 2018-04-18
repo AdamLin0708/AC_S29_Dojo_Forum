@@ -4,6 +4,12 @@ Rails.application.routes.draw do
 
   root "posts#index"
   resources :posts
+  resources :users, except: [:index, :new, :create, :destroy] do 
+    member do
+      get :profile 
+    end
+  end
+
 
   namespace :admin do 
     root "home#index"
