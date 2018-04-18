@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  mount_uploader :avatar, UserAvatarUploader         
   has_many :posts, dependent: :destroy        
 
   def admin?
