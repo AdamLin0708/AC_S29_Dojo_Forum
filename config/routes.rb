@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root "posts#index"
-  resources :posts
+  resources :posts do  
+    member do 
+      post :replies, :controller => 'replies', :action => 'create'    
+    end
+  end
   resources :users, except: [:index, :new, :create, :destroy] do 
     member do
       get :profile 
