@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:profile, :edit, :update]
 
   def profile
+    @posts = Post.where(user_id: current_user.id).all
   end
 
   def edit    
