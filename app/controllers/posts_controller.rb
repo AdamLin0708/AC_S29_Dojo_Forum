@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  before_action :authenticate_user!, except: [:index]
+  skip_before_action :authenticate_user!, only: [:index]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -50,6 +50,8 @@ class PostsController < ApplicationController
 
 
   #-------------private--------------#
+
+  private
 
   def posts_params
     params.require(:post).permit(:title, :content, :image,:status, :categories => [])
