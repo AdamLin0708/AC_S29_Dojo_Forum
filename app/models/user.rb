@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   mount_uploader :avatar, UserAvatarUploader         
   has_many :posts, dependent: :destroy        
+  has_many :replies, dependent: :destroy
 
   def admin?
     self.role == "admin"
