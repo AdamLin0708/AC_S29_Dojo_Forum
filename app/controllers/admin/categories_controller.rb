@@ -34,8 +34,12 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def destroy
-    @category.destroy
-    flash[:alert] = "成功刪除！！"
+    if @category.setted_posts.count == 0
+      @category.destroy
+      flash[:notice] = "成功刪除！！"
+    else 
+      flash[:alert] = "此分類已有文章，無法刪除！！"
+    end  
     redirect_back(fallback_location: root_path)    
   end
 

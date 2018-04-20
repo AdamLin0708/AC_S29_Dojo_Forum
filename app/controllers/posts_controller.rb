@@ -16,13 +16,23 @@ class PostsController < ApplicationController
     @post = Post.new(posts_params)
     @post.user_id = current_user.id
     
-    if @post.save
-      flash[:notice] = "新增成功"
-      redirect_to root_path
-    else
-      flash.now[:alert] = "新增失敗！"
+    if params[:post]['categories'].nil?
+      flash.now[:alert] = "請至少選擇一個分類！" 
+      @categories = Category.all
       render :new
+    else  
+      @post.save!
+      params[:post]['categories'].each do |item|
+        @post_category = PostCategory.create(
+          post_id: @post.id,
+          category_id: item
+        )
+        @post_category.save!
+      end 
+      flash[:notice] = "新增成功"  
+      redirect_to root_path    
     end
+    
   end
 
   def show
@@ -33,13 +43,25 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update(posts_params)
+
+    if params[:post]['categories'].nil?
+      flash.now[:alert] = "請至少選擇一個分類！"
+      @categories = Category.all
+      render :edit 
+    else  
+      @post.update(posts_params)
+      PostCategory.where(post_id: @post.id).destroy_all
+      params[:post]['categories'].each do |item|
+        @post_category = PostCategory.create(
+          post_id: @post.id,
+          category_id: item
+        )
+        @post_category.save!
+      end 
       flash[:notice] = "編輯成功"
       redirect_to root_path
-    else
-      flash.now[:alert] = "編輯失敗"
-      render :edit
-    end
+    end              
+
   end
 
   def destroy
@@ -54,7 +76,7 @@ class PostsController < ApplicationController
   private
 
   def posts_params
-    params.require(:post).permit(:title, :content, :image,:status, :categories => [])
+    params.require(:post).permit(:title, :content, :image,:status )
   end
 
   def set_post
