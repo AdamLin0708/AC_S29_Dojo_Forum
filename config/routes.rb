@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :posts do  
     member do 
       post :replies, :controller => 'replies', :action => 'create'    
+      post :replies_delete, :controller => 'replies', :action => 'destroy'
+      get :replies_edit, :controller => 'replies', :action => 'edit'    
+      post :replies_update, :controller => 'replies', :action => 'update'    
     end
   end
   resources :users, except: [:index, :new, :create, :destroy] do 
