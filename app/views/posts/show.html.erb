@@ -39,7 +39,10 @@
         <div class="col-md-8">
           <p>content <%= reply.comment %></p>
           <% if reply.user == current_user %>
-             <div class="pull-right">編輯 刪除</div>
+             <div class="pull-right">
+               <%= link_to '編輯', replies_edit_post_path(reply.id) %>
+               <%= link_to '刪除', replies_delete_post_path(reply.id), method: :post, data: { confirm: "確定要刪除?"} %>
+             </div>
           <% end %>
         </div>
       </div>
