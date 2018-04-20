@@ -10,11 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180418100401) do
+ActiveRecord::Schema.define(version: 20180420081452) do
 
   create_table "categories", force: :cascade do |t|
     t.string "code_abbr"
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "post_categories", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -27,7 +34,6 @@ ActiveRecord::Schema.define(version: 20180418100401) do
     t.string "title"
     t.integer "user_id"
     t.string "image"
-    t.text "categories"
     t.integer "replies_count", default: 0
   end
 
