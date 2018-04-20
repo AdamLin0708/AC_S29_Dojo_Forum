@@ -5,6 +5,11 @@
       <th>Title</th>
       <th>Last Replied At</th>
       <th>Viewed count</th>
+      <% if current_user %>
+        <% if current_user.admin? %>
+          <th>#</th>
+        <% end %>  
+      <% end %>
     </thead>
     <tbody>
       <% @posts.each do |post| %>
@@ -13,6 +18,13 @@
           <td><%= link_to(post.title, post_path(post.id)) %></td>
           <td></td>
           <td></td>
+          <% if current_user %>
+            <% if current_user.admin? %>
+              <td>
+                <%= link_to '刪除', post_path(post.id), method: :delete, data: { confirm: "確定要刪除?"} %>
+              </td>
+            <% end %>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
