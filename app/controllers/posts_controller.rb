@@ -59,7 +59,7 @@ class PostsController < ApplicationController
         @post_category.save!
       end 
       flash[:notice] = "編輯成功"
-      redirect_to root_path
+      redirect_to post_path(@post.id)
     end              
 
   end
