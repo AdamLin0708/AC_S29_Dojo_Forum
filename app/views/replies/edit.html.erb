@@ -1,0 +1,23 @@
+<div class="container">    
+  <div class="row">
+    <% if @reply.errors.any? %>
+      <h4>We have some errors here !</h4>
+      <ul>
+        <% @reply.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <%= form_for @reply, url: { controller: "replies", action: "update" }, method: "post" do |f| %>
+      <div class="form-group">
+        <%= f.label :comment, "回覆內容" %>
+        <%= f.text_area :comment, :class => 'form-control', :rows => '4', :style => 'resize: none' %>
+      </div>      
+      
+      <div class="form-group">
+        <%= f.submit '確認', :class => 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>  
