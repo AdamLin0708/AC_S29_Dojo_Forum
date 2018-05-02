@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     end
   end
 
+  # categories routes
+  resources :categories, only: :show
+
 
   namespace :admin do 
     root "home#index"
