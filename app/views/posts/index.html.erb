@@ -16,8 +16,8 @@
         <tr>
           <td><%= post.replies_count %></td>
           <td><%= link_to(post.title, post_path(post.id)) %></td>
-          <td></td>
-          <td></td>
+          <td><%= post.replies.order(updated_at: :desc).first.updated_at.strftime("%F") %></td>
+          <td><%= post.viewed_count %></td>
           <% if current_user %>
             <% if current_user.admin? %>
               <td>
