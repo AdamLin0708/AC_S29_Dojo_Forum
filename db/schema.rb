@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180420081452) do
+ActiveRecord::Schema.define(version: 20180502150017) do
 
   create_table "categories", force: :cascade do |t|
     t.string "code_abbr"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20180420081452) do
     t.integer "user_id"
     t.string "image"
     t.integer "replies_count", default: 0
+    t.integer "viewed_count", default: 0
   end
 
   create_table "replies", force: :cascade do |t|
