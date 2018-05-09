@@ -72,6 +72,15 @@ class PostsController < ApplicationController
     flash[:alert] = "成功刪除！！"
   end
 
+  def feeds
+    @users = User.all
+    @categories = Category.all
+    @posts = Post.all
+    @replies = Reply.all
+    @popular_posts = Post.order(replies_count: :desc).limit(10)
+    @popular_users = User.order(replies_count: :desc).limit(10)
+  end
+
 
   #-------------private--------------#
 

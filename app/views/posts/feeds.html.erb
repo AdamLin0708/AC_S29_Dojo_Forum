@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  User: <%= @users.count %><br>
+  Category: <%= @categories.count %><br>
+  Post: <%= @posts.count %><br>
+  Comment: <%= @replies.count %>
+</div>
+<hr>
+
+<div class="container-fluid row">
+  <div class="col-md-6">
+    <p>Chatter Box</p>
+    <hr>
+    <table>
+      <% @popular_users.each_with_index do |user, index| %>
+        <tr>
+          <td><%= index+1 %></td>
+          <td><%= user.username %></td>
+          <td><%= user.replies_count %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class="col-md-6">
+    <p>Most Popular Post</p>
+    <hr>
+    <table>
+      <% @popular_posts.each_with_index do |post, index| %>
+        <tr>
+          <td><%= index+1 %></td>
+          <td><%= post.title %></td>
+          <td><%= post.created_at.strftime("%F") %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
