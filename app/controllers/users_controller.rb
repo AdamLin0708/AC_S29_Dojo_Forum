@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :set_user, only: [:profile, :comment, :edit, :update]
+  before_action :set_user, only: [:profile, :comment, :draft, :edit, :update]
 
   def profile
     @posts = Post.where(user_id: params[:id], status: 'PUBLISHED').all
@@ -8,6 +8,10 @@ class UsersController < ApplicationController
 
   def comment
     @comments = Reply.where(user_id: params[:id]).all
+  end
+
+  def draft
+    @drafts = Post.where(user_id: params[:id], status: 'DRAFT').all
   end
 
   def edit    
