@@ -30,8 +30,13 @@ class PostsController < ApplicationController
         )
         @post_category.save!
       end 
-      flash[:notice] = "新增成功"  
-      redirect_to root_path    
+      if posts_params[:status] == 'DRAFT'
+        flash[:notice] = "文章儲存為草稿！"
+        redirect_to draft_user_path(@post.user.id)
+      else
+        flash[:notice] = "文章發佈成功！"  
+        redirect_to post_path(@post.id)
+      end
     end
     
   end
@@ -61,8 +66,14 @@ class PostsController < ApplicationController
         )
         @post_category.save!
       end 
-      flash[:notice] = "編輯成功"
-      redirect_to post_path(@post.id)
+
+      if posts_params[:status] == 'DRAFT'
+        flash[:notice] = "文章儲存為草稿！"
+        redirect_to draft_user_path(@post.user.id)
+      else
+        flash[:notice] = "文章發佈成功！"  
+        redirect_to post_path(@post.id)
+      end
     end              
 
   end
