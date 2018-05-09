@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div class="row" style="background-color: lightblue">
+    <div class="col-md-4">
+      <% if @user.avatar? %>
+        <%= image_tag(@user.avatar, class: 'img-circle img-responsive') %>
+      <% else %>
+        <img src="http://via.placeholder.com/200x200" class="img-circle img-responsive">
+      <% end %> 
+      <%= link_to @user.username,  profile_user_path(@user.id) %>
+      <% if @user == current_user %>
+        <%= link_to '編輯', edit_user_path(@user.id) %>
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <%= @user.introduction %>      
+    </div>
+  </div>
+  <div class="container-fluid">
+    <ul class="nav nav-pills">
+      <li><%= link_to 'My Post', profile_user_path %></li>
+      <li class="active"><%= link_to 'My Comment', comment_user_path %></li>
+      <li><%= link_to 'My Collect'%></li>
+      <li><%= link_to 'My Draft' %></li>
+      <li><%= link_to 'My Friend'%></li>      
+    </ul>    
+      <% @comments.each do |reply| %>
+        <div class="row">        
+          <div class="col-md-12">
+            <%= reply.post.title %>
+          </div> 
+          <div class="col-md-8">
+            <textarea rows="4" style="resize: none; width: 100%"><%= reply.comment %></textarea>
+          </div>
+          <div class="col-md-4">
+            edit delete
+          </div>          
+        </div>
+      <% end %>
+    </table>
+  </div>
+</div>
