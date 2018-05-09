@@ -4,6 +4,11 @@ Rails.application.routes.draw do
 
   root "posts#index"
   resources :posts do  
+
+    collection do 
+      get :feeds      
+    end
+
     member do 
       post :replies, :controller => 'replies', :action => 'create'    
       post :replies_delete, :controller => 'replies', :action => 'destroy'
