@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :users, except: [:index, :new, :create, :destroy] do 
     member do
       get :profile 
+      get :comment 
     end
   end
 
