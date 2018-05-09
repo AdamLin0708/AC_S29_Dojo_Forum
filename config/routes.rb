@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     member do
       get :profile 
       get :comment 
+      get :draft 
     end
   end
 
