@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="row" style="background-color: lightblue">    
+    <div class="col-md-4">
+      <% if @user.avatar? %>
+        <%= image_tag(@user.avatar, class: 'img-circle img-responsive') %>
+      <% else %>
+        <img src="http://via.placeholder.com/200x200" class="img-circle img-responsive">
+      <% end %> 
+      <%= link_to @user.username,  profile_user_path(@user.id) %>
+      <% if @user == current_user %>
+        <%= link_to '編輯', edit_user_path(@user.id) %>
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <%= @user.introduction %>      
+    </div>
+  </div>
+  <div class="container-fluid">
+    <ul class="nav nav-pills">
+      <li><%= link_to 'My Post', profile_user_path %></li>
+      <li><%= link_to 'My Comment', comment_user_path %></li>
+      <li><%= link_to 'My Collect'%></li>
+      <li class="active"><%= link_to 'My Draft', draft_user_path %></li>
+      <li><%= link_to 'My Friend'%></li>      
+    </ul>
+    <table class="table table-bordered">
+      <% @drafts.each do |draft| %>
+        <tr>
+          <td><%= draft.title %></td>
+          <td><%= draft.status == 'PUBLISHED' ? '已發佈' : '草稿' %></td>
+          <td><%= draft.created_at.strftime("%F") %></td>          
+          <td>
+            <%= link_to 'edit', edit_post_path(draft.id) %> delete
+          </td>          
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
