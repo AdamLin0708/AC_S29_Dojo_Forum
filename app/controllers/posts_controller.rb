@@ -41,6 +41,7 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @previous_url = Rails.application.routes.recognize_path(request.referrer)[:controller]
     @categories = Category.all
   end
 

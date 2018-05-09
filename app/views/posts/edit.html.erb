@@ -2,5 +2,8 @@
   <div class="page-header text-center">
     <h1>編輯文章</h1>
   </div>  
+  <% if @previous_url == 'users' %>  
+    <%= link_to '返回草稿列表', draft_user_path(@post.user.id), :class => 'btn btn-default btn-xs' %>
+  <% end %> 
   <%= render partial: "form" %>  
 </div>
