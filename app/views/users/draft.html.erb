@@ -30,7 +30,8 @@
           <td><%= draft.status == 'PUBLISHED' ? '已發佈' : '草稿' %></td>
           <td><%= draft.created_at.strftime("%F") %></td>          
           <td>
-            <%= link_to 'edit', edit_post_path(draft.id) %> delete
+            <%= link_to 'edit', edit_post_path(draft.id) %> 
+            <%= link_to '刪除', post_path(draft.id), method: :delete, data: { confirm: "確定要刪除?"} %>
           </td>          
         </tr>
       <% end %>

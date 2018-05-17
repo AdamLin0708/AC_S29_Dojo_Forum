@@ -79,9 +79,18 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @previous_url = Rails.application.routes.recognize_path(request.referrer)[:controller]
     @post.destroy
-    redirect_to root_path
     flash[:alert] = "成功刪除！！"
+
+    if @previous_url == 'users'
+      redirect_to draft_user_path(@post.user.id)
+    else
+      @categories = Category.all
+      @posts = Post.where(status: 'PUBLISHED').page(params[:page]).per(10)
+      render :index
+    end     
+    
   end
 
   def feeds
